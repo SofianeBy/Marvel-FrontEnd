@@ -4,3 +4,19 @@
   display: flex;
   justify-content: space-around;
 }
+.personage img {
+  height: 50px;
+  width: 50px;
+}
+.personage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  align-items: center;
+}
+.noimg {
+  height: 50px;
+  width: 50px;
+  background-color: rgb(69, 150, 150);
+}
