@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Comics = () => {
   const [data, setData] = useState({});
@@ -25,27 +26,36 @@ const Comics = () => {
   ) : (
     <>
       <h1 className="container">Comics</h1>
+      <div className="test">
+        {data.results.map((value, index) => {
+          console.log(value);
+          return (
+            <section key={value._id} className="personage">
+              <Link to={`/comics/${value._id}`} key={value._id}>
+                <div className="title description">{value.title}</div>
 
-      {data.results.map((value) => {
-        console.log(value);
-        return (
-          <section key={value._id} className="personage">
-            <div>{value.name}</div>
-            {value.description && <p>{value.description}</p>}
-            <div>
-              {value.thumbnail.path ===
-              "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
-                <div className="noimg"></div>
-              ) : (
-                <img
-                  src={value.thumbnail.path + "." + value.thumbnail.extension}
-                  alt={value.name}
-                />
-              )}
-            </div>
-          </section>
-        );
-      })}
+                <div>
+                  {value.thumbnail.path ===
+                  "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
+                    <div className="noimg"></div>
+                  ) : (
+                    <img
+                      src={
+                        value.thumbnail.path + "." + value.thumbnail.extension
+                      }
+                      alt={value.title}
+                    />
+                  )}
+                </div>
+                <p className="description">{index}</p>
+                {value.description && (
+                  <p className="description">{value.description}</p>
+                )}
+              </Link>
+            </section>
+          );
+        })}
+      </div>
     </>
   );
 };

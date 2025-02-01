@@ -25,30 +25,38 @@ const Personage = () => {
     <p>Chargement ...</p>
   ) : (
     <>
-      <h1 className="container">Personage</h1>
+      <nav className="search">
+        <h1>Personage</h1>
+      </nav>
 
-      {data.results.map((value, index) => {
-        console.log(value);
-        return (
-          
-            <section key={index} className="personage"><Link key={value._id} to={`/personage/${value._id}`}>
-              <div>{value.name}</div>
-              {value.description && <p>{value.description}</p>}
-              <div>
-                {value.thumbnail.path ===
-                "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
-                  <div className="noimg"> </div>
-                ) : (
-                  <img
-                    src={value.thumbnail.path + "." + value.thumbnail.extension}
-                    alt={value.name}
-                  />
-                )}
-              </div></Link>
+      <div className="test">
+        {data.results.map((value, index) => {
+          console.log(value);
+          return (
+            <section key={index}>
+              <Link key={value._id} to={`/personage/${value._id}`}>
+                <div className="personage">
+                  <div>{value.name}</div>
+                  {value.thumbnail.path ===
+                  "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
+                    <div className="noimg"> </div>
+                  ) : (
+                    <img
+                      src={
+                        value.thumbnail.path + "." + value.thumbnail.extension
+                      }
+                      alt={value.name}
+                    />
+                  )}
+                  {value.description && (
+                    <p className="description">{value.description}</p>
+                  )}
+                </div>
+              </Link>
             </section>
-          
-        );
-      })}
+          );
+        })}
+      </div>
     </>
   );
 };

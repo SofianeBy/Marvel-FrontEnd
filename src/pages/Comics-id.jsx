@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const PersonageId = () => {
+const ComicsId = () => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -11,9 +11,7 @@ const PersonageId = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/personage/${id}`
-        );
+        const response = await axios.get(`http://localhost:3000/comics/${id}`);
         console.log(response.data);
         setData(response.data);
         setIsLoading(false);
@@ -26,8 +24,8 @@ const PersonageId = () => {
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
-    <div key={data._id} className="test">
-      <div>{data.name}</div>
+    <div key={data._id}>
+      <div>{data.title}</div>
 
       {data.thumbnail.path ===
       "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
@@ -35,11 +33,11 @@ const PersonageId = () => {
       ) : (
         <img
           src={data.thumbnail.path + "." + data.thumbnail.extension}
-          alt={data.name}
+          alt={data.title}
         />
       )}
-      {data.description && <p >{data.description}</p>}
+      {data.description && <p>{data.description}</p>}
     </div>
   );
 };
-export default PersonageId;
+export default ComicsId;

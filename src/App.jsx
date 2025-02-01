@@ -5,6 +5,7 @@ import Comics from "./pages/Comics";
 import Header from "./compenents/Header";
 import PersonageId from "./pages/Personage-id";
 import Personage from "./pages/Personage";
+import ComicsId from "./pages/Comics-id";
 
 import "./App.css";
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/personage" element={<Personage />} />
           <Route path="/personage/:id" element={<PersonageId />} />
           <Route path="/comics" element={<Comics />} />
+          <Route path="/comics/:id" element={<ComicsId />} />
           {/* <Route path="/favoris" element={<Favoris />} /> */}
         </Routes>
       </Router>
