@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Favoris from "./Favoris";
 
 const PersonageId = () => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [favoris, setFavoris] = useState([]);
 
   const { id } = useParams();
 
@@ -28,7 +30,15 @@ const PersonageId = () => {
   ) : (
     <div key={data._id} className="test">
       <div>{data.name}</div>
-
+      <div
+        className="absolute"
+        onClick={(event) => {
+          const copy = [...favoris];
+          console.log(event);
+        }}
+      >
+        <i class="fa-regular fa-heart icon"></i>
+      </div>
       {data.thumbnail.path ===
       "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
         <div className="noimg"> </div>
@@ -38,7 +48,7 @@ const PersonageId = () => {
           alt={data.name}
         />
       )}
-      {data.description && <p >{data.description}</p>}
+      {data.description && <p>{data.description}</p>}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 import Home from "./pages/Home";
-// import Favoris from "./pages/Favoris";
+import Favoris from "./pages/Favoris";
 import Comics from "./pages/Comics";
 import Header from "./compenents/Header";
 import PersonageId from "./pages/Personage-id";
@@ -21,7 +22,7 @@ function App() {
           <Route path="/personage/:id" element={<PersonageId />} />
           <Route path="/comics" element={<Comics />} />
           <Route path="/comics/:id" element={<ComicsId />} />
-          {/* <Route path="/favoris" element={<Favoris />} /> */}
+          <Route path="/favoris" element={<Favoris />} />
         </Routes>
       </Router>
     </>

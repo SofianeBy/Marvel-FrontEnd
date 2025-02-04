@@ -15,6 +15,17 @@
   height: 200px;
   width: 200px;
 }
+.absolute {
+  /* position: absolute; */
+  background-color: black;
+}
+.pagination {
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  width: 100px;
+}
 .personage {
   display: flex;
   flex-direction: column;
@@ -47,4 +58,7 @@
   margin: 0 auto;
   gap: 100px;
   justify-content: space-between;
+}
+.icon {
+  z-index: 1;
 }
