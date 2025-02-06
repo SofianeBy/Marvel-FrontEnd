@@ -17,6 +17,7 @@ function App() {
         <Header />
 
         <Home path="/" />
+
         <Routes>
           <Route path="/personage" element={<Personage />} />
           <Route path="/personage/:id" element={<PersonageId />} />

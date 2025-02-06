@@ -3,13 +3,20 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Comics = () => {
+  const plus = ">";
+  const moins = "<";
+  const [counter, setCounter] = useState(1);
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [title, setTitle] = useState("");
+  const skip = (counter - 1) * 100;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/comics");
+        const response = await axios.get(
+          `http://localhost:3000/comics?skip=${skip}&title=${title}`
+        );
         console.log(response.data);
 
         setData(response.data);
@@ -19,13 +26,54 @@ const Comics = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [skip, title]);
 
   return isLoading ? (
     <p>Chargement ...</p>
   ) : (
     <>
       <h1 className="container">Comics</h1>
+      <input
+        type="text"
+        value={title}
+        onChange={(event) => {
+          setTitle(event.target.value);
+        }}
+      />
+      <div className="pagination">
+        <div>
+          {counter > 1 && (
+            <button
+              onClick={() => {
+                setCounter((prev) => {
+                  return prev - 1;
+                });
+              }}
+            >
+              <a href="#top">{moins}</a>
+            </button>
+          )}
+        </div>
+        <p>{counter}</p>
+        <p
+          onClick={(event) => {
+            setCounter(counter + 1);
+          }}
+        ></p>
+        <div>
+          {counter < 15 && (
+            <button
+              onClick={() => {
+                setCounter((prev) => {
+                  return prev + 1;
+                });
+              }}
+            >
+              <a href="#top">{plus}</a>
+            </button>
+          )}
+        </div>
+      </div>
       <div className="test">
         {data.results.map((value, index) => {
           console.log(value);
@@ -55,6 +103,40 @@ const Comics = () => {
             </section>
           );
         })}
+      </div>
+      <div className="pagination">
+        <div>
+          {counter > 1 && (
+            <button
+              onClick={() => {
+                setCounter((prev) => {
+                  return prev - 1;
+                });
+              }}
+            >
+              <a href="#top">{moins}</a>
+            </button>
+          )}
+        </div>
+        <p>{counter}</p>
+        <p
+          onClick={(event) => {
+            setCounter(counter + 1);
+          }}
+        ></p>
+        <div>
+          {counter < 15 && (
+            <button
+              onClick={() => {
+                setCounter((prev) => {
+                  return prev + 1;
+                });
+              }}
+            >
+              <a href="#top">{plus}</a>
+            </button>
+          )}
+        </div>
       </div>
     </>
   );
