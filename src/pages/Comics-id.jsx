@@ -14,7 +14,7 @@ const ComicsId = () => {
         const response = await axios.get(
           `https://site--marvel-backend--9m6btwtmk2gq.code.run/comics/${id}`
         );
-        // console.log(response.data);
+
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -28,7 +28,7 @@ const ComicsId = () => {
   ) : (
     <div key={data._id} className="personageId">
       <div>{data.title}</div>
-      {console.log(data)}
+
       {data.thumbnail.path ===
       "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
         <div className="noimg"> </div>

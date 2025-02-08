@@ -19,7 +19,6 @@ const Comics = () => {
         const response = await axios.get(
           `https://site--marvel-backend--9m6btwtmk2gq.code.run/comics?skip=${skip}&title=${title}`
         );
-        console.log(response.data);
 
         setData(response.data);
         setIsLoading(false);
@@ -83,7 +82,6 @@ const Comics = () => {
       </div>
       <div className="container-personage">
         {data.results.map((value, index) => {
-          console.log(value);
           return (
             <section key={value._id} className="personage description">
               <Link to={`/comics/${value._id}`} key={value._id}>
@@ -110,9 +108,9 @@ const Comics = () => {
                 key={value._id}
                 onClick={(event) => {
                   const newTAb = [...tab];
-                  newTAb.push(value);
+                  newTAb.push(value._id);
                   setTab(newTAb);
-                  console.log(newTAb);
+
                   JSON.stingify(
                     Cookie.set("favoris", JSON.stringify(newTAb), {
                       expires: 7,

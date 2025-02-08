@@ -8,7 +8,7 @@ const Personage = () => {
   const plus = ">";
   const moins = "<";
   const [counter, setCounter] = useState(1);
-  const [tab, setTab] = useState([]);
+  const [tab, setTab] = useState(JSON.parse(Cookie.get("favoris")));
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [name, setName] = useState("");
@@ -103,15 +103,14 @@ const Personage = () => {
                   </Link>
                 )}
 
-                {/* <Favoris key={index} tab={tab} setTab={setTab} value={value} /> */}
                 <div
                   className="absolute"
                   key={value._id}
                   onClick={(event) => {
                     const newTAb = [...tab];
-                    newTAb.push(value);
+                    newTAb.push(value._id);
                     setTab(newTAb);
-                    console.log(newTAb);
+
                     JSON.stingify(
                       Cookie.set("favoris", JSON.stringify(newTAb), {
                         expires: 7,
