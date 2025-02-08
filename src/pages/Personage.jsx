@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Favoris from "../compenents/Favoris";
+
 import Cookie from "js-cookie";
 
 const Personage = () => {
   const plus = ">";
   const moins = "<";
   const [counter, setCounter] = useState(1);
-  const [tab, setTab] = useState(JSON.parse(Cookie.get("favoris")));
+  const [tab, setTab] = useState();
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [name, setName] = useState("");
