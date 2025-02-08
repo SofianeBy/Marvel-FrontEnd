@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Favoris from "./Favoris";
 
 const PersonageId = () => {
@@ -16,7 +16,7 @@ const PersonageId = () => {
         const response = await axios.get(
           `http://localhost:3000/personage/${id}`
         );
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -28,13 +28,13 @@ const PersonageId = () => {
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
-    <div key={data._id} className="test">
+    <div key={data._id} className="personageId">
       <div>{data.name}</div>
       <div
         className="absolute"
         onClick={(event) => {
           const copy = [...favoris];
-          console.log(event);
+          // console.log(event);
         }}
       >
         <i class="fa-regular fa-heart icon"></i>
@@ -48,7 +48,34 @@ const PersonageId = () => {
           alt={data.name}
         />
       )}
+
       {data.description && <p>{data.description}</p>}
+      {data.comics.length > 0 && (
+        <p className="personageId">
+          <p>Comics où ce personnage apparaît</p>
+          <div className="comicsId">
+            {data.comics.map((element) => {
+              console.log(element);
+              return (
+                <section key={element._id} className="comicsId">
+                  <div>
+                    <Link to={`/comics/${element._id}`}>
+                      <img
+                        src={
+                          element.thumbnail.path +
+                          "." +
+                          element.thumbnail.extension
+                        }
+                        alt={element.name}
+                      />
+                    </Link>
+                  </div>
+                </section>
+              );
+            })}
+          </div>
+        </p>
+      )}
     </div>
   );
 };

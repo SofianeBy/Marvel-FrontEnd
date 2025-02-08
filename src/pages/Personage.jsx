@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Favoris from "../compenents/Favoris";
+import Cookie from "js-cookie";
 
 const Personage = () => {
   const plus = ">";
   const moins = "<";
   const [counter, setCounter] = useState(1);
+  const [tab, setTab] = useState([]);
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [name, setName] = useState("");
@@ -15,9 +18,8 @@ const Personage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/personage?skip=${skip}&name=${name}`
+          `https://site--marvel-backend--9m6btwtmk2gq.code.run/personage?skip=${skip}&name=${name}`
         );
-        console.log(response.data.results.length);
 
         setData(response.data);
         setIsLoading(false);
@@ -26,7 +28,7 @@ const Personage = () => {
       }
     };
     fetchData();
-  }, [skip, name]);
+  }, [skip, name, tab]);
 
   return isLoading ? (
     <p>Chargement ...</p>
@@ -34,13 +36,16 @@ const Personage = () => {
     <>
       <nav className="search">
         <h1 className="container">Personage</h1>
-        <input
-          type="text"
-          value={name}
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
-        />
+        <div className="container">
+          <input
+            placeholder="Quel personage cherchez-vous ?"
+            type="text"
+            value={name}
+            onChange={(event) => {
+              setName(event.target.value);
+            }}
+          />
+        </div>
         <div className="pagination">
           <div>
             {counter > 1 && (
@@ -77,10 +82,10 @@ const Personage = () => {
         </div>
       </nav>
 
-      <div className="test">
+      <div className="container-personage">
         {data.results.map((value, index) => {
           return (
-            <section key={value._id}>
+            <section key={value._id} className="description">
               <div className="personage">
                 <div>{value.name}</div>
 
@@ -98,19 +103,26 @@ const Personage = () => {
                   </Link>
                 )}
 
+                {/* <Favoris key={index} tab={tab} setTab={setTab} value={value} /> */}
                 <div
                   className="absolute"
                   key={value._id}
                   onClick={(event) => {
-                    console.log(event);
+                    const newTAb = [...tab];
+                    newTAb.push(value);
+                    setTab(newTAb);
+                    console.log(newTAb);
+                    JSON.stingify(
+                      Cookie.set("favoris", JSON.stringify(newTAb), {
+                        expires: 7,
+                      })
+                    );
                   }}
                 >
                   Favoris
                 </div>
 
-                {value.description && (
-                  <p className="description">{value.description}</p>
-                )}
+                {value.description && <p>{value.description}</p>}
               </div>
             </section>
           );

@@ -7,11 +7,15 @@ const Home = () => {
 
   return (
     <div className="container">
-      <Link to="/personage" name={name} setName={setName}>
+      <Link to="/personage" name={name} setName={setName} className="menu">
         Personage
       </Link>
-      <Link to="/comics">Comics</Link>
-      <Link to="/favoris">Favoris</Link>
+      <Link to="/comics" className="menu">
+        Comics
+      </Link>
+      <Link to="/favoris" className="menu">
+        Favoris
+      </Link>
     </div>
   );
 };

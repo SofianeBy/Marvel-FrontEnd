@@ -10,6 +10,28 @@
   gap: 20px;
   font-family: "Montserrat", serif;
 }
+.container input {
+  width: 250px;
+  text-align: center;
+  padding: 10px;
+  font-family: "Montserrat", serif;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+.menu {
+  background-color: rgba(151, 173, 173, 0.553);
+  height: 250px;
+  text-align: center;
+  width: 250px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
 
 .personage img {
   height: 200px;
@@ -36,30 +58,79 @@
   gap: 15px;
   align-items: center;
 }
+.personageId {
+  padding-top: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  margin: 0 auto;
+}
+.personageId img {
+  height: 250px;
+  width: 250px;
+}
+.comicsId {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* width: 2000px; */
+
+  background-color: aqua;
+}
+.favoris {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  width: 1024px;
+  background-color: aquamarine;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 auto;
+
+  flex-direction: row;
+}
+.favoris img {
+  height: 150px;
+}
 .noimg {
   height: 200px;
   width: 200px;
   background-color: rgb(69, 150, 150);
+  cursor: pointer;
 }
 .description {
+  text-decoration: none;
   width: 200px;
-  background-color: aquamarine;
+  background-color: rgba(98, 112, 107, 0.297);
+  padding: 5px 18px;
+  border-radius: 15px;
   color: black;
   text-align: center;
   font-family: "Montserrat", serif;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 .title {
   padding-bottom: 25px;
 }
-.test {
-  background-color: aquamarine;
+.container-personage {
+  background-color: rgba(98, 112, 107, 0.137);
   display: flex;
   flex-wrap: wrap;
+  padding: 100px;
+  border-radius: 25px;
   width: 1250px;
   margin: 0 auto;
   gap: 100px;
   justify-content: space-between;
-}
-.icon {
-  z-index: 1;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
 }

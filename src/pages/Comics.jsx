@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Cookie from "js-cookie";
 
 const Comics = () => {
   const plus = ">";
   const moins = "<";
   const [counter, setCounter] = useState(1);
+  const [tab, setTab] = useState([]);
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [title, setTitle] = useState("");
@@ -15,7 +17,7 @@ const Comics = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/comics?skip=${skip}&title=${title}`
+          `https://site--marvel-backend--9m6btwtmk2gq.code.run/comics?skip=${skip}&title=${title}`
         );
         console.log(response.data);
 
@@ -33,13 +35,18 @@ const Comics = () => {
   ) : (
     <>
       <h1 className="container">Comics</h1>
-      <input
-        type="text"
-        value={title}
-        onChange={(event) => {
-          setTitle(event.target.value);
-        }}
-      />
+
+      <div className="container">
+        <input
+          placeholder="Quel comics cherchez-vous ? "
+          type="text"
+          value={title}
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+        />
+      </div>
+
       <div className="pagination">
         <div>
           {counter > 1 && (
@@ -61,7 +68,7 @@ const Comics = () => {
           }}
         ></p>
         <div>
-          {counter < 15 && (
+          {counter < 474 && (
             <button
               onClick={() => {
                 setCounter((prev) => {
@@ -74,15 +81,17 @@ const Comics = () => {
           )}
         </div>
       </div>
-      <div className="test">
+      <div className="container-personage">
         {data.results.map((value, index) => {
           console.log(value);
           return (
-            <section key={value._id} className="personage">
+            <section key={value._id} className="personage description">
               <Link to={`/comics/${value._id}`} key={value._id}>
-                <div className="title description">{value.title}</div>
+                <div className="title">{value.title}</div>
+              </Link>
 
-                <div>
+              <div>
+                <Link to={`/comics/${value._id}`}>
                   {value.thumbnail.path ===
                   "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
                     <div className="noimg"></div>
@@ -94,11 +103,29 @@ const Comics = () => {
                       alt={value.title}
                     />
                   )}
-                </div>
-                <p className="description">{index}</p>
-                {value.description && (
-                  <p className="description">{value.description}</p>
-                )}
+                </Link>
+              </div>
+              <div
+                className="absolute"
+                key={value._id}
+                onClick={(event) => {
+                  const newTAb = [...tab];
+                  newTAb.push(value);
+                  setTab(newTAb);
+                  console.log(newTAb);
+                  JSON.stingify(
+                    Cookie.set("favoris", JSON.stringify(newTAb), {
+                      expires: 7,
+                    })
+                  );
+                }}
+              >
+                Favoris
+              </div>
+
+              <Link to={`/comics/${value._id}`}>
+                <p className="">{index}</p>
+                {value.description && <p className="">{value.description}</p>}
               </Link>
             </section>
           );
@@ -125,7 +152,7 @@ const Comics = () => {
           }}
         ></p>
         <div>
-          {counter < 15 && (
+          {counter < 474 && (
             <button
               onClick={() => {
                 setCounter((prev) => {
