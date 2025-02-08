@@ -18,7 +18,7 @@ const FavorisPersonnage = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3000/personage/${id}`
+            `http://site--marvel-backend--9m6btwtmk2gq.code.run/personage/${id}`
           );
           console.log(response.data);
           setData(response.data);

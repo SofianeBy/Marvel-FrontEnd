@@ -14,9 +14,9 @@ const PersonageId = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/personage/${id}`
+          `https://site--marvel-backend--9m6btwtmk2gq.code.run/personage/${id}`
         );
-
+        console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -30,7 +30,15 @@ const PersonageId = () => {
   ) : (
     <div key={data._id} className="personageId">
       <div>{data.name}</div>
-
+      <div
+        className="absolute"
+        onClick={(event) => {
+          const copy = [...favoris];
+          // console.log(event);
+        }}
+      >
+        <i class="fa-regular fa-heart icon"></i>
+      </div>
       {data.thumbnail.path ===
       "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ? (
         <div className="noimg"> </div>
@@ -47,6 +55,7 @@ const PersonageId = () => {
           <p>Comics où ce personnage apparaît</p>
           <div className="comicsId">
             {data.comics.map((element) => {
+              console.log(element);
               return (
                 <section key={element._id} className="comicsId">
                   <div>

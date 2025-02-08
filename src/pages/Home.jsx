@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div className="container">
       <Link to="/personage" name={name} setName={setName} className="menu">
-        Personage
+        Personnage
       </Link>
       <Link to="/comics" className="menu">
         Comics
